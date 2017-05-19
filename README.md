@@ -1,6 +1,8 @@
 # ChickGen
 
-Swift Class Generator
+**UNDER HEAVY CONSTRUCTION**
+
+ChickGen generates Swift Code. Currently ChickGen only supports input files in JSON format.
 
 ## Getting Started
 
