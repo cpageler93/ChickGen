@@ -34,6 +34,8 @@ class JSONSettingsParser {
         // parse general
         let general = Settings.General()
         general.author = json["author"].string
+        general.projectName = json["projectName"].string
+        
         return general
     }
     

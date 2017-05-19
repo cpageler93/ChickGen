@@ -4,16 +4,18 @@
 // MORE INFO: github: cpageler93/ChickGen
 //
 //
-//  MasterClass.swift
-//  Project Name
+//  TodoItem.swift
+//  Todo List
 //
-//  Created by Author Name on 19. May 2017, 21:42:37
+//  Created by Christoph Pageler on 19. May 2017, 21:46:00
 //
 //
 
 import Foundation
 
-public class MasterClass {
+public class TodoItem {
 
+   let id: Int
+   let title: String
 
 }

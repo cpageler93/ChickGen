@@ -14,6 +14,7 @@ open class Settings {
     
     open class General {
         var author: String?
+        var projectName: String?
     }
     var general: General?
     

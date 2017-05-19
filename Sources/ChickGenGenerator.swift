@@ -87,16 +87,16 @@ extension ChickGenGenerator {
             
             // create context
             let context: [String : Any] = [
-                "projectName": "Hello this is Test",
+                "projectName": self.settings.general?.projectName ?? "<projectName>",
                 "fileName": classFileName,
                 "date": DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium),
-                "author": self.settings.general?.author ?? "🐣",
+                "author": self.settings.general?.author ?? "<author>",
                 "imports": settingClass.imports ?? [],
                 "class": [
                     "name": settingClass.swiftClass(),
                     "attributes": settingClass.attributes.map {
                         return [
-                            "ref": $0.ref,
+                            "ref": $0.ref.rawValue,
                             "name": $0.name,
                             "type": $0.swiftType()
                         ]

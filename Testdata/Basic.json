@@ -1,6 +1,7 @@
 {
 	"general": {
-		"author": "Author Name"
+		"author": "Author Name",
+		"projectName": "Project Name"
 	},
 	"classes": [
 		{

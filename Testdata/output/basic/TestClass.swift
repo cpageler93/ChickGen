@@ -5,9 +5,9 @@
 //
 //
 //  TestClass.swift
-//  Hello this is Test
+//  Project Name
 //
-//  Created by Author Name on 19. May 2017, 21:37:26
+//  Created by Author Name on 19. May 2017, 21:42:37
 //
 //
 
