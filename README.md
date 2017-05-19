@@ -2,6 +2,20 @@
 
 Swift Class Generator
 
+## Getting Started
+
+### Run ChickGen
+
+    ChickGen generate Todo.json ~/output/todo/
+
+### Use Package
+
+```swift
+let chickgen = try ChickGenGenerator(withContentOfFile: pathToJSONFile)
+let settings = GenerateSettings(outputDirectory: pathToOutputDirectory)
+try chickgen.generate(settings)
+```
+
 ## Example
 
 Input file
