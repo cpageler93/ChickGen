@@ -4,13 +4,29 @@
 	},
 	"classes": [
 		{
+			"name": "MasterClass",
+			"imports": [
+				"Foundation"
+			]
+		},
+		{
 			"name": "TestClass",
+			"superclass": "MasterClass",
+			"imports": [
+				"Foundation"
+			],
 			"attributes": [
 				{
 					"ref": "let",
 					"name": "foo",
 					"type": "String",
 					"optional": true
+				},
+				{
+					"ref": "let",
+					"name": "bar",
+					"type": "String",
+					"optional": false
 				}
 			]
 		}
