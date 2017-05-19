@@ -94,14 +94,22 @@ extension ChickGenGenerator {
                 "imports": settingClass.imports ?? [],
                 "class": [
                     "name": settingClass.swiftClass(),
-                    "attributes": settingClass.attributes.map {
+                    "attributes": settingClass.attributes.map { attr in
                         return [
-                            "ref": $0.ref.rawValue,
-                            "name": $0.name,
-                            "type": $0.swiftType()
+                            "ref": attr.ref.rawValue,
+                            "name": attr.name,
+                            "type": attr.swiftType()
+                        ]
+                    },
+                    "functions": settingClass.functions.map { function in
+                        return [
+                            "name": function.name,
+                            "formattedParameters": function.formattedParameters(),
+                            "formattedReturn": function.formattedReturn(),
+                            "bodyLines": function.bodyLines
                         ]
                     }
-                ]
+                ] as [String: Any]
             ]
             
             // render template with context

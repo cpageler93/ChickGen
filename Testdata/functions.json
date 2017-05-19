@@ -8,7 +8,7 @@
             "name": "GithubClient",
             "superclass": "QuackClient",
             "imports": [
-                "Foundation"
+                "Foundation",
                 "Quack"
             ],
             "functions": [
@@ -16,8 +16,7 @@
                     "name": "repositories",
                     "parameters": [
                         {
-                            "nameIn": "owner",
-                            "nameOut": "owner",
+                            "name": "owner",
                             "type": "String",
                             "optional": false
                         }
@@ -33,14 +32,13 @@
                     "name": "repositories",
                     "parameters": [
                         {
-                            "label": "owner",
                             "name": "owner",
                             "type": "String",
                             "optional": false
                         },
                         {
                             "label": "completion",
-                            "name": "completion",
+                            "name": "completionBlock",
                             "type": "@escaping (QuackResult<[GithubRepository]>) -> (Void)",
                             "optional": false
                         }
@@ -49,7 +47,7 @@
                         "return respondWithArrayAsync(method: .get,",
                         "                             path: \"/users/\\(owner)/repos\",",
                         "                             model: GithubRepository.self,",
-                        "                             completion: completion)"
+                        "                             completion: completionBlock)"
                     ]
                 }
             ]

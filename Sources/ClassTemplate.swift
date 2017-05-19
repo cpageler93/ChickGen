@@ -32,6 +32,13 @@ class ClassTemplate {
 "{% for attr in class.attributes %}                     \n" +
 "   {{ attr.ref }} {{ attr.name }}: {{ attr.type }}       " +
 "{% endfor %}                                           \n" +
+"{% for func in class.functions %}                      \n" +
+"   public func {{ func.name }}({{ func.formattedParameters }}) {{ func.formattedReturn }} { \n" +
+"{% for bodyLine in func.bodyLines %}                   \n" +
+"       {{ bodyLine }}                                  " +
+"{% endfor %}                                           \n" +
+"   }                                                   \n" +
+"{% endfor %}                                           \n" +
 "                                                       \n" +
 "}                                                      \n"
         return template
