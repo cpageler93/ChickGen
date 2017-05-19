@@ -1,0 +1,86 @@
+{
+    "general": {
+        "author": "Christoph Pageler",
+        "projectName": "Github Client"
+    },
+    "classes": [
+        {
+            "name": "GithubClient",
+            "superclass": "QuackClient",
+            "imports": [
+                "Foundation"
+                "Quack"
+            ],
+            "functions": [
+                {
+                    "name": "repositories",
+                    "parameters": [
+                        {
+                            "nameIn": "owner",
+                            "nameOut": "owner",
+                            "type": "String",
+                            "optional": false
+                        }
+                    ],
+                    "returnType": "QuackResult<[GithubRepository]>",
+                    "bodyLines": [
+                        "return respondWithArray(method: .get,",
+                        "                        path: \"/users/\\(owner)/repos\",",
+                        "                        model: GithubRepository.self)"
+                    ]
+                },
+                {
+                    "name": "repositories",
+                    "parameters": [
+                        {
+                            "label": "owner",
+                            "name": "owner",
+                            "type": "String",
+                            "optional": false
+                        },
+                        {
+                            "label": "completion",
+                            "name": "completion",
+                            "type": "@escaping (QuackResult<[GithubRepository]>) -> (Void)",
+                            "optional": false
+                        }
+                    ],
+                    "bodyLines": [
+                        "return respondWithArrayAsync(method: .get,",
+                        "                             path: \"/users/\\(owner)/repos\",",
+                        "                             model: GithubRepository.self,",
+                        "                             completion: completion)"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "GithubRepository",
+            "superclass": "QuackModel",
+            "imports": [
+                "Foundation",
+                "Quack"
+            ],
+            "attributes": [
+                {
+                    "ref": "var",
+                    "name": "name",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "ref": "var",
+                    "name": "fullName",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "ref": "var",
+                    "name": "owner",
+                    "type": "String",
+                    "optional": true
+                }
+            ]
+        }
+    ]
+}
