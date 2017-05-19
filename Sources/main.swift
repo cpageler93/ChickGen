@@ -15,12 +15,8 @@ Group {
             exit(1)
         }
         
-        guard let chickgen = ChickGen(withContentOfFile: filepath) else {
-            print("could not initialize")
-            exit(1)
-        }
-        
         do {
+            let chickgen = try ChickGenGenerator(withContentOfFile: filepath)
             try chickgen.generate()
         } catch {
             print("error on generate")

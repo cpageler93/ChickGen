@@ -1,0 +1,18 @@
+{
+	"general": {
+		"author": "Author Name"
+	},
+	"classes": [
+		{
+			"name": "TestClass",
+			"attributes": [
+				{
+					"ref": "let",
+					"name": "foo",
+					"type": "String",
+					"optional": true
+				}
+			]
+		}
+	]
+}
