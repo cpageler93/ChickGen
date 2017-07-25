@@ -43,25 +43,45 @@ open class ChickGenGenerator {
 
 extension ChickGenGenerator {
     
+    struct OutputFile {
+        let fileName: String
+        let fileContent: String
+        
+        init(fileName: String, fileContent: String) {
+            self.fileName = fileName
+            self.fileContent = fileContent
+        }
+    }
+    
     public func generate(_ generateSettings: GenerateSettings) throws {
         
-        // get template
+        var outputFiles: [OutputFile] = []
+        outputFiles.append(contentsOf: try generateClasses(settings.classes))
+        
+        // replace ~ with absolute home directory
+        let outputDirectory = Path(generateSettings.outputDirectory.string.replacingOccurrences(of: "~", with: NSHomeDirectory()))
+        
+        // when rendering succeded, save files
+        for outputFile in outputFiles {
+            
+            let filepath = outputDirectory + Path(outputFile.fileName)
+            
+            // TODO: only when set to clean
+            if filepath.exists {
+                try FileManager.default.removeItem(atPath: filepath.string)
+            }
+            
+            try outputFile.fileContent.write(to: filepath.url, atomically: true, encoding: .utf8)
+        }
+    }
+    
+    private func generateClasses(_ classes: [Settings.Class]) throws -> [OutputFile] {
+        var outputFiles: [OutputFile] = []
+        
+        // get class template
         let templateString = ClassTemplate.getTemplate()
         let template = Template(templateString: templateString)
         
-        // prepare output
-        struct OutputFile {
-            let fileName: String
-            let fileContent: String
-            
-            init(fileName: String, fileContent: String) {
-                self.fileName = fileName
-                self.fileContent = fileContent
-            }
-        }
-        var outputFiles: [OutputFile] = []
-        
-        // enumerate classes
         for settingClass in self.settings.classes {
             
             let classFileName = settingClass.filename()
@@ -90,12 +110,12 @@ extension ChickGenGenerator {
                             "bodyLines": function.bodyLines
                         ]
                     }
-                ] as [String: Any]
+                    ] as [String: Any]
             ]
             
             // render template with context
             var renderedClassString = try template.render(context)
-        
+            
             // trim whitespace (only at end of line) on each line
             var comp = renderedClassString.components(separatedBy: "\n")
             comp = comp.map { $0.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression) }
@@ -105,20 +125,7 @@ extension ChickGenGenerator {
             outputFiles.append(outputFile)
         }
         
-        // when rendering succeded, save files
-        for outputFile in outputFiles {
-            // replace ~ with absolute home directory
-            let outputDirectory = Path(generateSettings.outputDirectory.string.replacingOccurrences(of: "~", with: NSHomeDirectory()))
-            
-            let filepath = outputDirectory + Path(outputFile.fileName)
-            
-            // TODO: only when set to clean
-            if filepath.exists {
-                try FileManager.default.removeItem(atPath: filepath.string)
-            }
-            
-            try outputFile.fileContent.write(to: filepath.url, atomically: true, encoding: .utf8)
-        }
+        return outputFiles
+        
     }
-    
 }
