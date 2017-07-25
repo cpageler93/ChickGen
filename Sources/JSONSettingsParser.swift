@@ -160,7 +160,7 @@ class JSONSettingsParser {
         let classFunction = Settings.Class.Function(name: name, bodyLines: bodyLines)
         
         if let jsonParameters = json["parameters"].array {
-            var parameters: [Settings.Class.Function.Parameter] = []
+            var parameters: [Settings.Class.FunctionParameter] = []
             for jsonParameter in jsonParameters {
                 let parameter = try classFunctionParameterFromJSON(jsonParameter)
                 parameters.append(parameter)
@@ -175,7 +175,7 @@ class JSONSettingsParser {
         return classFunction
     }
     
-    private func classFunctionParameterFromJSON(_ json: JSON) throws -> Settings.Class.Function.Parameter {
+    private func classFunctionParameterFromJSON(_ json: JSON) throws -> Settings.Class.FunctionParameter {
         guard
             let name = json["name"].string,
             let type = json["type"].string
@@ -183,7 +183,7 @@ class JSONSettingsParser {
                 throw ChickGenError.parsingError
         }
         
-        let parameter = Settings.Class.Function.Parameter(name: name, type: type)
+        let parameter = Settings.Class.FunctionParameter(name: name, type: type)
         
         if let label = json["label"].string {
             parameter.label = label

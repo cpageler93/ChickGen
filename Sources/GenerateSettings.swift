@@ -10,9 +10,11 @@ import Foundation
 import PathKit
 
 public struct GenerateSettings {
-    let outputDirectory: Path
     
-    init(outputDirectory: Path) {
+    public let outputDirectory: Path
+    
+    public init(outputDirectory: Path) {
         self.outputDirectory = outputDirectory
     }
+    
 }

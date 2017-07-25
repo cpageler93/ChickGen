@@ -10,26 +10,17 @@ import Foundation
 import PathKit
 import Stencil
 
-public enum ChickGenError: Error {
-    case missingFileExtension
-    case unknownFileExtension
-    case parsingError
-}
-
-public enum ChickGenFileType: String {
-    case json
-}
 
 open class ChickGenGenerator {
     
-    public private(set) var settings: Settings!
+    public private(set) var settings: Settings
     
     public init(settings: Settings) {
         self.settings = settings
     }
     
     public init(withContent content: String, fileType: ChickGenFileType) throws {
-        let parser = settingsParserFor(fileType: fileType)
+        let parser = fileType.settingsParser()
         self.settings = try parser.settingsFromFileWithContent(content)
     }
     
@@ -45,23 +36,13 @@ open class ChickGenGenerator {
         
         try self.init(withContent: content, fileType: fileType)
     }
-}
-
-// MARK: Settings Parsing
-
-extension ChickGenGenerator {
-    
-    public func settingsParserFor(fileType: ChickGenFileType) -> SettingsParser {
-        switch fileType {
-        case .json: return JSONSettingsParser()
-        }
-    }
     
 }
 
 // MARK: Generation
 
 extension ChickGenGenerator {
+    
     public func generate(_ generateSettings: GenerateSettings) throws {
         
         // get template
@@ -126,7 +107,10 @@ extension ChickGenGenerator {
         
         // when rendering succeded, save files
         for outputFile in outputFiles {
-            let filepath = generateSettings.outputDirectory + Path(outputFile.fileName)
+            // replace ~ with absolute home directory
+            let outputDirectory = Path(generateSettings.outputDirectory.string.replacingOccurrences(of: "~", with: NSHomeDirectory()))
+            
+            let filepath = outputDirectory + Path(outputFile.fileName)
             
             // TODO: only when set to clean
             if filepath.exists {
@@ -136,4 +120,5 @@ extension ChickGenGenerator {
             try outputFile.fileContent.write(to: filepath.url, atomically: true, encoding: .utf8)
         }
     }
+    
 }
