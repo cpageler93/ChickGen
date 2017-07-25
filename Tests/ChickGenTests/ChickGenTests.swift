@@ -12,8 +12,8 @@ class ChickGenTests: XCTestCase {
     
     func testFoo() {
         let settings = Settings()
-        settings.general?.author = "Christoph Pageler"
-        settings.general?.projectName = "ChickGen Tests"
+        settings.general.author = "Christoph Pageler"
+        settings.general.projectName = "ChickGen Tests"
         
         let attributes = [
             Settings.Class.Attribute(ref: .let, name: "foo", type: "String", optional: true),
@@ -38,6 +38,9 @@ class ChickGenTests: XCTestCase {
             "UIKit"
         ]
         settings.classes.append(class1)
+        
+        let enum1 = Settings.Enum(name: "SandwichSize", cases: ["small", "medium", "large"])
+        settings.enums.append(enum1)
         
         let generator = ChickGenGenerator(settings: settings)
         

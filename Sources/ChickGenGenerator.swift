@@ -57,6 +57,7 @@ extension ChickGenGenerator {
         
         var outputFiles: [OutputFile] = []
         outputFiles.append(contentsOf: try generateClasses(settings.classes))
+        outputFiles.append(contentsOf: try generateEnums(settings.enums))
         
         // replace ~ with absolute home directory
         let outputDirectory = Path(generateSettings.outputDirectory.string.replacingOccurrences(of: "~", with: NSHomeDirectory()))
@@ -82,27 +83,27 @@ extension ChickGenGenerator {
         let templateString = ClassTemplate.getTemplate()
         let template = Template(templateString: templateString)
         
-        for settingClass in self.settings.classes {
+        for settingClass in classes {
             
             let classFileName = settingClass.filename()
             
             // create context
             let context: [String : Any] = [
-                "projectName": self.settings.general?.projectName ?? "<projectName>",
+                "projectName": settings.general.projectName ?? "<projectName>",
                 "fileName": classFileName,
                 "date": DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium),
-                "author": self.settings.general?.author ?? "<author>",
+                "author": settings.general.author ?? "<author>",
                 "imports": settingClass.imports ?? [],
                 "class": [
                     "name": settingClass.swiftClass(),
-                    "attributes": settingClass.attributes.map { attr in
+                    "attributes": (settingClass.attributes ?? []).map { attr in
                         return [
                             "ref": attr.ref.rawValue,
                             "name": attr.name,
                             "type": attr.swiftType()
                         ]
                     },
-                    "functions": settingClass.functions.map { function in
+                    "functions": (settingClass.functions ?? []).map { function in
                         return [
                             "name": function.name,
                             "formattedParameters": function.formattedParameters(),
@@ -126,6 +127,44 @@ extension ChickGenGenerator {
         }
         
         return outputFiles
-        
     }
+    
+    private func generateEnums(_ enums: [Settings.Enum]) throws -> [OutputFile] {
+        var outputFiles: [OutputFile] = []
+        
+        // get enum template
+        let templateString = EnumTemplate.getTemplate()
+        let template = Template(templateString: templateString)
+        
+        for settingsEnum in enums {
+            
+            let enumFileName = settingsEnum.filename()
+            
+            // create context
+            let context: [String : Any] = [
+                "projectName": settings.general.projectName ?? "<projectName>",
+                "fileName": enumFileName,
+                "date": DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium),
+                "author": settings.general.author ?? "<author>",
+                "enum": [
+                    "name": settingsEnum.name,
+                    "cases": settingsEnum.cases
+                    ] as [String: Any]
+            ]
+            
+            // render template with context
+            var renderedClassString = try template.render(context)
+            
+            // trim whitespace (only at end of line) on each line
+            var comp = renderedClassString.components(separatedBy: "\n")
+            comp = comp.map { $0.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression) }
+            renderedClassString = comp.joined(separator: "\n")
+            
+            let outputFile = OutputFile(fileName: enumFileName, fileContent: renderedClassString)
+            outputFiles.append(outputFile)
+        }
+        
+        return outputFiles
+    }
+    
 }

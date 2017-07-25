@@ -21,7 +21,9 @@ extension JSONSettingsParser: SettingsParser {
         }
         
         let settings = Settings()
-        settings.general = generalSettingsFromJSON(json["general"])
+        if let general = generalSettingsFromJSON(json["general"]) {
+            settings.general = general
+        }
         settings.classes = try classSettingsArrayFromJSON(json["classes"])
         
         return settings
@@ -31,9 +33,7 @@ extension JSONSettingsParser: SettingsParser {
 class JSONSettingsParser {
     
     fileprivate func generalSettingsFromJSON(_ json: JSON) -> Settings.General? {
-        guard !json.isEmpty else {
-            return nil
-        }
+        guard !json.isEmpty else { return nil }
         
         // parse general
         let general = Settings.General()

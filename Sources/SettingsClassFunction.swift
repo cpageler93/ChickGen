@@ -12,7 +12,7 @@ public extension Settings.Class {
     public class Function {
         
         public var name: String
-        public var parameters: [Settings.Class.FunctionParameter]
+        public var parameters: [Settings.Class.FunctionParameter]?
         public var returnType: String?
         public var bodyLines: [String]
         
@@ -20,18 +20,12 @@ public extension Settings.Class {
                     parameters: [Settings.Class.FunctionParameter]? = nil,
                     bodyLines: [String]) {
             self.name = name
-            if let parameters = parameters {
-                self.parameters = parameters
-            } else {
-                self.parameters = []
-            }
+            self.parameters = parameters
             self.bodyLines = bodyLines
         }
         
         public func formattedParameters() -> String {
-            guard parameters.count > 0 else {
-                return ""
-            }
+            guard let parameters = parameters, parameters.count > 0 else { return "" }
             
             var formattedParameterArray: [String] = []
             for parameter in parameters {

@@ -14,8 +14,9 @@ public extension Settings {
         public var name: String
         public var superclass: String?
         public var imports: [String]?
-        public var attributes: [Attribute] = []
-        public var functions: [Function]
+        public var attributes: [Attribute]?
+        public var functions: [Function]?
+        public var enums: [Enum]?
         
         public init(name: String, attributes: [Attribute], functions: [Function]) {
             self.name = name

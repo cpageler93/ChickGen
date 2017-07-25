@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59126F9B1F27833300BF0E60 /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59126F9A1F27833300BF0E60 /* SettingEnum.swift */; };
+		59126F9D1F27868700BF0E60 /* EnumTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59126F9C1F27868700BF0E60 /* EnumTemplate.swift */; };
 		OBJ_101 /* Spectre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* Spectre.framework */; };
 		OBJ_108 /* ArgumentConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* ArgumentConvertible.swift */; };
 		OBJ_109 /* ArgumentDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* ArgumentDescription.swift */; };
@@ -188,6 +190,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		59126F9A1F27833300BF0E60 /* SettingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
+		59126F9C1F27868700BF0E60 /* EnumTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumTemplate.swift; sourceTree = "<group>"; };
 		OBJ_10 /* ChickGenGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickGenGenerator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ClassTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTemplate.swift; sourceTree = "<group>"; };
 		OBJ_12 /* fooNotmain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fooNotmain.swift; sourceTree = "<group>"; };
@@ -450,11 +454,13 @@
 				OBJ_9 /* ChickGenFileType.swift */,
 				OBJ_10 /* ChickGenGenerator.swift */,
 				OBJ_11 /* ClassTemplate.swift */,
+				59126F9C1F27868700BF0E60 /* EnumTemplate.swift */,
 				OBJ_12 /* fooNotmain.swift */,
 				OBJ_13 /* GenerateSettings.swift */,
 				OBJ_14 /* JSONSettingsParser.swift */,
 				OBJ_15 /* Settings.swift */,
 				OBJ_16 /* SettingsClass.swift */,
+				59126F9A1F27833300BF0E60 /* SettingEnum.swift */,
 				OBJ_17 /* SettingsClassAttribute.swift */,
 				OBJ_18 /* SettingsClassFunction.swift */,
 				OBJ_19 /* SettingsClassFunctionParameter.swift */,
@@ -700,6 +706,7 @@
 				OBJ_163 /* ChickGenFileType.swift in Sources */,
 				OBJ_164 /* ChickGenGenerator.swift in Sources */,
 				OBJ_165 /* ClassTemplate.swift in Sources */,
+				59126F9D1F27868700BF0E60 /* EnumTemplate.swift in Sources */,
 				OBJ_166 /* fooNotmain.swift in Sources */,
 				OBJ_167 /* GenerateSettings.swift in Sources */,
 				OBJ_168 /* JSONSettingsParser.swift in Sources */,
@@ -711,6 +718,7 @@
 				OBJ_174 /* SettingsClassRef.swift in Sources */,
 				OBJ_175 /* SettingsGeneral.swift in Sources */,
 				OBJ_176 /* SettingsParser.swift in Sources */,
+				59126F9B1F27833300BF0E60 /* SettingEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
