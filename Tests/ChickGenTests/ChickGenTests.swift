@@ -15,9 +15,13 @@ class ChickGenTests: XCTestCase {
         settings.general.author = "Christoph Pageler"
         settings.general.projectName = "ChickGen Tests"
         
+        let attrWithDefault = Settings.Class.Attribute(name: "baz", type: "String")
+        attrWithDefault.defaultValue = "\"Fooo\""
+        
         let attributes = [
             Settings.Class.Attribute(ref: .let, name: "foo", type: "String", optional: true),
-            Settings.Class.Attribute(ref: .let, name: "bar", type: "Int", optional: false)
+            Settings.Class.Attribute(ref: .let, name: "bar", type: "Int", optional: false),
+            attrWithDefault
         ]
         
         let functions = [

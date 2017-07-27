@@ -16,6 +16,7 @@ public extension Settings.Class {
         public var type: String
         public var optional: Bool
         public var accessControl: String = "public"
+        public var defaultValue: String?
         
         public init(ref: Settings.ClassRef = .let,
                     name: String,
@@ -29,6 +30,11 @@ public extension Settings.Class {
         
         public func swiftType() -> String {
             return type + (optional ? "?" : "")
+        }
+        
+        public func swiftDefaultValue() -> String {
+            guard let defaultValue = defaultValue else { return "" }
+            return "= \(defaultValue)"
         }
     }
     

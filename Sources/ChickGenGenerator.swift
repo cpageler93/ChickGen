@@ -102,7 +102,8 @@ extension ChickGenGenerator {
                             "accessControl": attr.accessControl,
                             "ref": attr.ref.rawValue,
                             "name": attr.name,
-                            "type": attr.swiftType()
+                            "type": attr.swiftType(),
+                            "defaultValue": attr.swiftDefaultValue()
                         ]
                     },
                     "functions": (settingClass.functions ?? []).map { function in
