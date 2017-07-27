@@ -15,6 +15,7 @@ public extension Settings.Class {
         public var name: String
         public var type: String
         public var optional: Bool
+        public var accessControl: String = "public"
         
         public init(ref: Settings.ClassRef = .let,
                     name: String,

@@ -15,6 +15,7 @@ public extension Settings.Class {
         public var parameters: [Settings.Class.FunctionParameter]?
         public var returnType: String?
         public var bodyLines: [String]
+        public var accessControl: String = "public"
         
         public init(name: String,
                     parameters: [Settings.Class.FunctionParameter]? = nil,

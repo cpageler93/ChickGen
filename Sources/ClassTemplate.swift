@@ -28,15 +28,15 @@ class ClassTemplate {
 import {{ import }}{% endfor %}
 
 
-public class {{ class.name }} {
+{{class.accessControl}} class {{ class.name }} {
 {% for attr in class.attributes %}
-   public {{ attr.ref }} {{ attr.name }}: {{ attr.type }}{% endfor %}
+    {{attr.accessControl}} {{ attr.ref }} {{ attr.name }}: {{ attr.type }}{% endfor %}
 {% for func in class.functions %}
-   public func {{ func.name }}({{ func.formattedParameters }}) {{ func.formattedReturn }} {
+    {{func.accessControl}} func {{ func.name }}({{ func.formattedParameters }}) {{ func.formattedReturn }} {
 {% for bodyLine in func.bodyLines %}
-       {{ bodyLine }}{% endfor %}
+        {{ bodyLine }}{% endfor %}
 
-   }
+    }
 {% endfor %}
 }
 """

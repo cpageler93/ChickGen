@@ -17,6 +17,7 @@ public extension Settings {
         public var attributes: [Attribute]?
         public var functions: [Function]?
         public var enums: [Enum]?
+        public var accessControl: String = "public"
         
         public init(name: String, attributes: [Attribute], functions: [Function]) {
             self.name = name

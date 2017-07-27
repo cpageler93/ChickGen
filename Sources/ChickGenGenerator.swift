@@ -95,9 +95,11 @@ extension ChickGenGenerator {
                 "author": settings.general.author ?? "<author>",
                 "imports": settingClass.imports ?? [],
                 "class": [
+                    "accessControl": settingClass.accessControl,
                     "name": settingClass.swiftClass(),
                     "attributes": (settingClass.attributes ?? []).map { attr in
                         return [
+                            "accessControl": attr.accessControl,
                             "ref": attr.ref.rawValue,
                             "name": attr.name,
                             "type": attr.swiftType()
@@ -106,6 +108,7 @@ extension ChickGenGenerator {
                     "functions": (settingClass.functions ?? []).map { function in
                         return [
                             "name": function.name,
+                            "accessControl": function.accessControl,
                             "formattedParameters": function.formattedParameters(),
                             "formattedReturn": function.formattedReturn(),
                             "bodyLines": function.bodyLines
