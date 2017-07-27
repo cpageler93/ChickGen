@@ -30,6 +30,11 @@ class ChickGenTests: XCTestCase {
             ], bodyLines: [
                 "print(foo)",
                 "exit(1)"
+            ]),
+            Settings.Class.Function(name: "init", parameters: [
+                Settings.Class.FunctionParameter(name: "foo", type: "String")
+            ], bodyLines: [
+                "self.foo = foo"
             ])
         ]
         
