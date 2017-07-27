@@ -35,6 +35,11 @@ class ChickGenTests: XCTestCase {
                 Settings.Class.FunctionParameter(name: "foo", type: "String")
             ], bodyLines: [
                 "self.foo = foo"
+            ]),
+            Settings.Class.Function(name: "init?", parameters: [
+                Settings.Class.FunctionParameter(name: "foo", type: "String")
+            ], bodyLines: [
+                "self.foo = foo"
             ])
         ]
         

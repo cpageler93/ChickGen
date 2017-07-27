@@ -109,7 +109,7 @@ extension ChickGenGenerator {
                     "functions": (settingClass.functions ?? []).map { function in
                         return [
                             "name": function.name,
-                            "func": (function.name == "init" ? " " : " func "),
+                            "func": ((function.name == "init" || function.name == "init?") ? " " : " func "),
                             "accessControl": function.accessControl,
                             "formattedParameters": function.formattedParameters(),
                             "formattedReturn": function.formattedReturn(),
