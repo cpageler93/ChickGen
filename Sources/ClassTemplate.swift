@@ -27,7 +27,6 @@ class ClassTemplate {
 {% for import in imports %}
 import {{ import }}{% endfor %}
 
-
 {{class.accessControl}} class {{ class.name }} {
 {% for attr in class.attributes %}
     {{attr.accessControl}} {{ attr.ref }} {{ attr.name }}: {{ attr.type }} {{ attr.defaultValue }}{{ attr.formattedDynamicAttribute }}{% endfor %}

@@ -23,6 +23,9 @@ class ExtensionTemplate {
 //
 //
 
+{% for import in imports %}
+import {{ import }}{% endfor %}
+
 {{ext.accessControl}} extension {{ ext.name }}{{ ext.inheritance }} {
 {% for attr in ext.attributes %}
     {{attr.accessControl}} {{ attr.ref }} {{ attr.name }}: {{ attr.type }} {{ attr.defaultValue }}{{ attr.formattedDynamicAttribute }}{% endfor %}
