@@ -17,6 +17,7 @@ public extension Settings.Class {
         public var optional: Bool
         public var accessControl: String = "public"
         public var defaultValue: String?
+        public var dynamicAttributeLines: [String]?
         
         public init(ref: Settings.ClassRef = .let,
                     name: String,
@@ -35,6 +36,19 @@ public extension Settings.Class {
         public func swiftDefaultValue() -> String {
             guard let defaultValue = defaultValue else { return "" }
             return "= \(defaultValue)"
+        }
+        
+        public func formattedDynamicAttribute() -> String {
+            guard let dynamicAttributeLines = dynamicAttributeLines else { return "" }
+            var lines: [String] = []
+            lines.append("{")
+            
+            for attributeLine in dynamicAttributeLines {
+                lines.append("        \(attributeLine)")
+            }
+            lines.append("    }")
+            
+            return lines.joined(separator: "\n")
         }
     }
     

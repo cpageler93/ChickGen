@@ -98,27 +98,9 @@ extension ChickGenGenerator {
                 "class": [
                     "accessControl": settingClass.accessControl,
                     "name": settingClass.swiftClass(),
-                    "attributes": (settingClass.attributes ?? []).map { attr in
-                        return [
-                            "accessControl": attr.accessControl,
-                            "ref": attr.ref.rawValue,
-                            "name": attr.name,
-                            "type": attr.swiftType(),
-                            "defaultValue": attr.swiftDefaultValue()
-                        ]
-                    },
-                    "functions": (settingClass.functions ?? []).map { function in
-                        return [
-                            "name": function.name,
-                            "func": ((function.name == "init" || function.name == "init?") ? " " : " func "),
-                            "accessControl": function.accessControl,
-                            "formattedParameters": function.formattedParameters(),
-                            "formattedThrows": function.formattedThrows(),
-                            "formattedReturn": function.formattedReturn(),
-                            "bodyLines": function.bodyLines
-                        ]
-                    }
-                    ] as [String: Any]
+                    "attributes": attributesMap(settingClass.attributes),
+                    "functions": functionsMap(settingClass.functions)
+                ] as [String: Any]
             ]
             
             // render template with context
@@ -134,6 +116,33 @@ extension ChickGenGenerator {
         }
         
         return outputFiles
+    }
+    
+    private func functionsMap(_ functions: [Settings.Class.Function]?) -> [[String: Any]] {
+        return (functions ?? []).map { function in
+            return [
+                "name": function.name,
+                "func": ((function.name == "init" || function.name == "init?") ? " " : " func "),
+                "accessControl": function.accessControl,
+                "formattedParameters": function.formattedParameters(),
+                "formattedThrows": function.formattedThrows(),
+                "formattedReturn": function.formattedReturn(),
+                "bodyLines": function.bodyLines
+            ]
+        }
+    }
+    
+    private func attributesMap(_ attributes: [Settings.Class.Attribute]?) -> [[String: Any]] {
+        return (attributes ?? []).map { attr in
+            return [
+                "accessControl": attr.accessControl,
+                "ref": attr.ref.rawValue,
+                "name": attr.name,
+                "type": attr.swiftType(),
+                "defaultValue": attr.swiftDefaultValue(),
+                "formattedDynamicAttribute": attr.formattedDynamicAttribute()
+            ]
+        }
     }
     
     private func generateEnums(_ enums: [Settings.Enum]) throws -> [OutputFile] {
@@ -156,7 +165,7 @@ extension ChickGenGenerator {
                 "enum": [
                     "name": settingsEnum.name,
                     "cases": settingsEnum.cases
-                    ] as [String: Any]
+                ] as [String: Any]
             ]
             
             // render template with context
@@ -196,17 +205,8 @@ extension ChickGenGenerator {
                 "ext": [
                     "accessControl": settingsExtension.accessControl,
                     "name": settingsExtension.swiftExtensionName(),
-                    "functions": (settingsExtension.functions ?? []).map { function in
-                        return [
-                            "name": function.name,
-                            "func": ((function.name == "init" || function.name == "init?") ? " " : " func "),
-                            "accessControl": function.accessControl,
-                            "formattedParameters": function.formattedParameters(),
-                            "formattedThrows": function.formattedThrows(),
-                            "formattedReturn": function.formattedReturn(),
-                            "bodyLines": function.bodyLines
-                        ]
-                    }
+                    "functions": functionsMap(settingsExtension.functions),
+                    "attributes": attributesMap(settingsExtension.attributes),
                     ] as [String: Any]
             ]
             

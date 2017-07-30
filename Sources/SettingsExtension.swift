@@ -14,6 +14,7 @@ public extension Settings {
         public var filename: String?
         public var inheritance: String?
         public var imports: [String]?
+        public var attributes: [Settings.Class.Attribute]?
         public var functions: [Settings.Class.Function]?
         public var accessControl: String = "public"
         

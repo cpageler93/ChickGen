@@ -30,7 +30,7 @@ import {{ import }}{% endfor %}
 
 {{class.accessControl}} class {{ class.name }} {
 {% for attr in class.attributes %}
-    {{attr.accessControl}} {{ attr.ref }} {{ attr.name }}: {{ attr.type }} {{ attr.defaultValue }}{% endfor %}
+    {{attr.accessControl}} {{ attr.ref }} {{ attr.name }}: {{ attr.type }} {{ attr.defaultValue }}{{ attr.formattedDynamicAttribute }}{% endfor %}
 {% for func in class.functions %}
     {{func.accessControl}}{{func.func}}{{ func.name }}({{ func.formattedParameters }}){{ func.formattedThrows }}{{ func.formattedReturn }} {
 {% for bodyLine in func.bodyLines %}

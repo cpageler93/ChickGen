@@ -24,6 +24,8 @@ class ExtensionTemplate {
 //
 
 {{ext.accessControl}} extension {{ ext.name }}{{ ext.inheritance }} {
+{% for attr in ext.attributes %}
+    {{attr.accessControl}} {{ attr.ref }} {{ attr.name }}: {{ attr.type }} {{ attr.defaultValue }}{{ attr.formattedDynamicAttribute }}{% endfor %}
 {% for func in ext.functions %}
     {{func.accessControl}}{{func.func}}{{ func.name }}({{ func.formattedParameters }}){{ func.formattedThrows }}{{ func.formattedReturn }} {
 {% for bodyLine in func.bodyLines %}

@@ -18,10 +18,21 @@ class ChickGenTests: XCTestCase {
         let attrWithDefault = Settings.Class.Attribute(name: "baz", type: "String")
         attrWithDefault.defaultValue = "\"Fooo\""
         
+        let attrDynamic = Settings.Class.Attribute(name: "dynamic", type: "String")
+        attrDynamic.ref = .var
+        attrDynamic.accessControl = "public static"
+        attrDynamic.dynamicAttributeLines = [
+            "return [",
+            "   Foo",
+            "   Bar",
+            "].join(\", \")"
+        ]
+        
         let attributes = [
             Settings.Class.Attribute(ref: .let, name: "foo", type: "String", optional: true),
             Settings.Class.Attribute(ref: .let, name: "bar", type: "Int", optional: false),
-            attrWithDefault
+            attrWithDefault,
+            attrDynamic
         ]
         
         let functions = [
@@ -56,6 +67,9 @@ class ChickGenTests: XCTestCase {
         ext1Func.throws = true
         ext1.functions = [
             ext1Func
+        ]
+        ext1.attributes = [
+            attrDynamic
         ]
         settings.extensions = [ext1]
         
