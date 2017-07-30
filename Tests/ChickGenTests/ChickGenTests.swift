@@ -43,6 +43,22 @@ class ChickGenTests: XCTestCase {
             ])
         ]
         
+        let ext1 = Settings.Extension(name: "Foo")
+        ext1.filename = "FooExtensions"
+        ext1.accessControl = "internal"
+        ext1.imports = [
+            "Something"
+        ]
+//        ext1.inheritance = "Bar"
+        let ext1Func = Settings.Class.Function(name: "some", bodyLines: [
+            "print(\"foo bar\")"
+        ])
+        ext1Func.throws = true
+        ext1.functions = [
+            ext1Func
+        ]
+        settings.extensions = [ext1]
+        
         let class1 = Settings.Class(name: "Foo",
                                     attributes: attributes,
                                     functions: functions)

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		59126F9B1F27833300BF0E60 /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59126F9A1F27833300BF0E60 /* SettingEnum.swift */; };
 		59126F9D1F27868700BF0E60 /* EnumTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59126F9C1F27868700BF0E60 /* EnumTemplate.swift */; };
+		594EF54A1F2DD1AF00D278F2 /* SettingsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594EF5491F2DD1AF00D278F2 /* SettingsExtension.swift */; };
+		594EF54C1F2DD20A00D278F2 /* ExtensionTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594EF54B1F2DD20A00D278F2 /* ExtensionTemplate.swift */; };
 		OBJ_101 /* Spectre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* Spectre.framework */; };
 		OBJ_108 /* ArgumentConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* ArgumentConvertible.swift */; };
 		OBJ_109 /* ArgumentDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* ArgumentDescription.swift */; };
@@ -192,6 +194,8 @@
 /* Begin PBXFileReference section */
 		59126F9A1F27833300BF0E60 /* SettingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
 		59126F9C1F27868700BF0E60 /* EnumTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumTemplate.swift; sourceTree = "<group>"; };
+		594EF5491F2DD1AF00D278F2 /* SettingsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtension.swift; sourceTree = "<group>"; };
+		594EF54B1F2DD20A00D278F2 /* ExtensionTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTemplate.swift; sourceTree = "<group>"; };
 		OBJ_10 /* ChickGenGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChickGenGenerator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ClassTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTemplate.swift; sourceTree = "<group>"; };
 		OBJ_12 /* fooNotmain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fooNotmain.swift; sourceTree = "<group>"; };
@@ -392,7 +396,7 @@
 			path = ".build/checkouts/Stencil--9185492005012625299/Sources";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -402,7 +406,6 @@
 				OBJ_27 /* Dependencies */,
 				OBJ_72 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_51 /* Commander 0.6.1 */ = {
@@ -455,6 +458,7 @@
 				OBJ_10 /* ChickGenGenerator.swift */,
 				OBJ_11 /* ClassTemplate.swift */,
 				59126F9C1F27868700BF0E60 /* EnumTemplate.swift */,
+				594EF54B1F2DD20A00D278F2 /* ExtensionTemplate.swift */,
 				OBJ_12 /* fooNotmain.swift */,
 				OBJ_13 /* GenerateSettings.swift */,
 				OBJ_14 /* JSONSettingsParser.swift */,
@@ -466,6 +470,7 @@
 				OBJ_19 /* SettingsClassFunctionParameter.swift */,
 				OBJ_20 /* SettingsClassRef.swift */,
 				OBJ_21 /* SettingsGeneral.swift */,
+				594EF5491F2DD1AF00D278F2 /* SettingsExtension.swift */,
 				OBJ_22 /* SettingsParser.swift */,
 			);
 			path = Sources;
@@ -630,7 +635,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_72 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -706,6 +711,7 @@
 				OBJ_163 /* ChickGenFileType.swift in Sources */,
 				OBJ_164 /* ChickGenGenerator.swift in Sources */,
 				OBJ_165 /* ClassTemplate.swift in Sources */,
+				594EF54A1F2DD1AF00D278F2 /* SettingsExtension.swift in Sources */,
 				59126F9D1F27868700BF0E60 /* EnumTemplate.swift in Sources */,
 				OBJ_166 /* fooNotmain.swift in Sources */,
 				OBJ_167 /* GenerateSettings.swift in Sources */,
@@ -715,6 +721,7 @@
 				OBJ_171 /* SettingsClassAttribute.swift in Sources */,
 				OBJ_172 /* SettingsClassFunction.swift in Sources */,
 				OBJ_173 /* SettingsClassFunctionParameter.swift in Sources */,
+				594EF54C1F2DD20A00D278F2 /* ExtensionTemplate.swift in Sources */,
 				OBJ_174 /* SettingsClassRef.swift in Sources */,
 				OBJ_175 /* SettingsGeneral.swift in Sources */,
 				OBJ_176 /* SettingsParser.swift in Sources */,

@@ -58,6 +58,7 @@ extension ChickGenGenerator {
         var outputFiles: [OutputFile] = []
         outputFiles.append(contentsOf: try generateClasses(settings.classes))
         outputFiles.append(contentsOf: try generateEnums(settings.enums))
+        outputFiles.append(contentsOf: try generateExtensions(settings.extensions))
         
         // replace ~ with absolute home directory
         let outputDirectory = Path(generateSettings.outputDirectory.string.replacingOccurrences(of: "~", with: NSHomeDirectory()))
@@ -112,6 +113,7 @@ extension ChickGenGenerator {
                             "func": ((function.name == "init" || function.name == "init?") ? " " : " func "),
                             "accessControl": function.accessControl,
                             "formattedParameters": function.formattedParameters(),
+                            "formattedThrows": function.formattedThrows(),
                             "formattedReturn": function.formattedReturn(),
                             "bodyLines": function.bodyLines
                         ]
@@ -166,6 +168,57 @@ extension ChickGenGenerator {
             renderedClassString = comp.joined(separator: "\n")
             
             let outputFile = OutputFile(fileName: enumFileName, fileContent: renderedClassString)
+            outputFiles.append(outputFile)
+        }
+        
+        return outputFiles
+    }
+    
+    
+    private func generateExtensions(_ extensions: [Settings.Extension]) throws -> [OutputFile] {
+        var outputFiles: [OutputFile] = []
+        
+        // get extension template
+        let templateString = ExtensionTemplate.getTemplate()
+        let template = Template(templateString: templateString)
+        
+        for settingsExtension in extensions {
+            
+            let extensionFileName = settingsExtension.swiftFileName()
+            
+            // create context
+            let context: [String : Any] = [
+                "projectName": settings.general.projectName ?? "<projectName>",
+                "fileName": settingsExtension.swiftFileName(),
+                "date": DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .medium),
+                "author": settings.general.author ?? "<author>",
+                "imports": settingsExtension.imports ?? [],
+                "ext": [
+                    "accessControl": settingsExtension.accessControl,
+                    "name": settingsExtension.swiftExtensionName(),
+                    "functions": (settingsExtension.functions ?? []).map { function in
+                        return [
+                            "name": function.name,
+                            "func": ((function.name == "init" || function.name == "init?") ? " " : " func "),
+                            "accessControl": function.accessControl,
+                            "formattedParameters": function.formattedParameters(),
+                            "formattedThrows": function.formattedThrows(),
+                            "formattedReturn": function.formattedReturn(),
+                            "bodyLines": function.bodyLines
+                        ]
+                    }
+                    ] as [String: Any]
+            ]
+            
+            // render template with context
+            var renderedString = try template.render(context)
+            
+            // trim whitespace (only at end of line) on each line
+            var comp = renderedString.components(separatedBy: "\n")
+            comp = comp.map { $0.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression) }
+            renderedString = comp.joined(separator: "\n")
+            
+            let outputFile = OutputFile(fileName: extensionFileName, fileContent: renderedString)
             outputFiles.append(outputFile)
         }
         

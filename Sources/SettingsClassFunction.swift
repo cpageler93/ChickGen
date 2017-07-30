@@ -16,6 +16,7 @@ public extension Settings.Class {
         public var returnType: String?
         public var bodyLines: [String]
         public var accessControl: String = "public"
+        public var `throws`: Bool = false
         
         public init(name: String,
                     parameters: [Settings.Class.FunctionParameter]? = nil,
@@ -44,6 +45,14 @@ public extension Settings.Class {
                 return "-> \(returnType)"
             } else {
                 return ""
+            }
+        }
+        
+        public func formattedThrows() -> String {
+            if `throws` {
+                return " throws "
+            } else {
+                return " "
             }
         }
         
