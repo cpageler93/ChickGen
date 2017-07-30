@@ -50,7 +50,7 @@ public extension Settings.Class {
         
         public func formattedThrows() -> String {
             if `throws` {
-                return " throws "
+                return " throws"
             } else {
                 return " "
             }
